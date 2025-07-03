@@ -18,17 +18,27 @@ def check_guess(answer, number):
     else:
         return "Correct!\n"
 
-def main():
-    tries = 0
-    number = generate_number()
-    guess_result = ''
-    
-    while guess_result != "Correct!\n":
-        answer = take_guess()
-        guess_result = check_guess(answer, number)
-        print(guess_result)
-        tries += 1
+def main(): #Changed for stretch
+    high_score = 100
+    play = 'y'
 
-    print(f"You took {tries} tries.")
+    while play in ['y', 'yes']:
+        tries = 0
+        number = generate_number()
+        guess_result = ''
+    
+        while guess_result != "Correct!\n":
+            answer = take_guess()
+            guess_result = check_guess(answer, number)
+            print(guess_result)
+            tries += 1
+
+        print(f"You took {tries} tries.")
+        if tries < high_score:
+            high_score = tries
+            print(f"New high score: {high_score} tries.")
+        else:
+            print(f"You couldn't beat your high score of {high_score} tries.")
+        play = input("Play again? (y/n): ").lower().strip()
 
 main()
